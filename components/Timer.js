@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { gsap } from "gsap";
 import { useInterval } from "@/utils";
+import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 
 export default function Timer() {
     const [time, setTime] = useState(5);
@@ -13,9 +14,9 @@ export default function Timer() {
         if (time < 2) setDelay(null);
     }, delay)
 
-    useEffect(() => {
+    useIsomorphicEffect(() => {
         const tl = gsap.timeline();
-        tl.fromTo('#bgTimerCircle', { strokeDashoffset: 500 }, { strokeDashoffset: 95, duration: 1, ease: "power1.out", delay: 0.5 });
+        tl.fromTo('#bgTimerCircle', { strokeDashoffset: 500 }, { strokeDashoffset: 95, duration: 1, ease: "power1.out", delay: 1.5 });
         tl.fromTo('#timerCircle', { strokeDashoffset: 500 }, { strokeDashoffset: 95, duration: 1, ease: "power1.out" });
         tl.to('#timerCircle', {
             strokeDashoffset: 500, duration: (5 * time) / 5.35, ease: "none", onStart: () => {
@@ -35,7 +36,7 @@ export default function Timer() {
                     strokeLinecap="round"
                     fill="none">
                 </path>
-                <text x="52" y="83" fill="white">{time.toString().length > 1 ? `0:${time}` : `0:0${time}`}</text>
+                <text x="52" y="83" strokeDasharray={900} fill="white">{time.toString().length > 1 ? `0:${time}` : `0:0${time}`}</text>
                 <defs>
                     <linearGradient id="grad1" x1="30%" x2="100%" y1="0%" y2="0%">
                         <stop offset="0%" style={{ stopColor: "rgb(214, 19, 85)", stopOpacity: 1 }} />
