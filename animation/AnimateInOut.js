@@ -1,10 +1,10 @@
 import { gsap } from "gsap";
-import { useTransitionContext } from "@/context/TransitionProvider";
-import { useRef } from "react";
+import { TransitionContext } from "@/context/TransitionContext";
+import { useContext, useRef } from "react";
 import { useIsomorphicEffect } from "./useIsomophicEffect";
 
 export default function AnimateInOut({ children, durationIn, durationOut, to, from, delayIn, delayOut, set, skipOutro, ease, className }) {
-    const { timeline } = useTransitionContext();
+    const [data, dispatch] = useContext(TransitionContext);
     const ref = useRef();
 
     useIsomorphicEffect(() => {
@@ -19,7 +19,7 @@ export default function AnimateInOut({ children, durationIn, durationOut, to, fr
         })
 
         if (!skipOutro) {
-            timeline.add(
+            data.timeline.add(
                 gsap.to(ref.current, {
                     ...from,
                     duration: durationOut || 1,
@@ -29,6 +29,7 @@ export default function AnimateInOut({ children, durationIn, durationOut, to, fr
             )
         }
     }, [])
+
 
     return (
         <div ref={ref} className={className}>
