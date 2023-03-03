@@ -1,6 +1,6 @@
 import AnimateInOut from "./AnimateInOut";
 
-export default function FlyUpInOut({ children, durationIn, durationOut, delayIn, delayOut, className}) {
+export default function FlyUpInOut({ children, durationIn, durationOut, delayIn, delayOut, className, skipOutro}) {
     return (
         <AnimateInOut
             set={{yPercent: 100, opacity: 0}}
@@ -11,6 +11,7 @@ export default function FlyUpInOut({ children, durationIn, durationOut, delayIn,
             delayIn={delayIn}
             delayOut={delayOut}
             className={className}
+            skipOutro={skipOutro}
         >
             {children}
         </AnimateInOut>
