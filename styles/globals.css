@@ -136,8 +136,14 @@ a {
   flex-wrap: wrap;
 }
 
+.container__block__base-rect{
+  width: clamp(8rem, 45%, 10rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .container__block__rect {
-  width: clamp(8rem, 43%, 10rem);
+  width: 100%;
   height: auto;
   padding: 20px 10px;
   border-radius: var(--border-radius);
@@ -155,4 +161,5 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all .5s ease-in-out;
 }
