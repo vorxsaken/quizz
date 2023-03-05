@@ -71,8 +71,76 @@ a {
   z-index: 1;
 }
 
+.container--attached {
+  gap: 0px;
+}
+
+.container--attached-md {
+  gap: 0.2rem;
+}
+
+.container--distant {
+  gap: 1.5rem;
+}
+
+.container--title {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.container--full {
+  height: calc(100vh - 3vh);
+}
+
+.container--row {
+  flex-direction: row;
+}
+
+.container__block {
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.container__block__base-rect {
+  width: clamp(8rem, 45%, 10rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container__block_base-rect--flipable {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+}
+
+.container__block__rect {
+  width: 100%;
+  height: 130px;
+  padding: 20px 10px;
+  border-radius: var(--border-radius);
+  background-color: white;
+  color: var(--background-start-rgb);
+}
+
+.container__block__multiple-choice {
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s ease-in-out;
+}
+
+
 .shape-background {
-  overflow: hidden;;
+  overflow: hidden;
+  ;
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -85,7 +153,7 @@ a {
   position: absolute;
 }
 
-.shape:first-child{
+.shape:first-child {
   top: -100px;
   left: -300px
 }
@@ -122,44 +190,30 @@ a {
   color: var(--text-color)
 }
 
-.container--title {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+.text-xl {
+  font-size: 2.5rem;
 }
 
-.container--row {
-  flex-direction: row;
-}
-
-.container__block {
+.text-center {
   text-align: center;
-  flex-wrap: wrap;
 }
 
-.container__block__base-rect{
-  width: clamp(8rem, 45%, 10rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.container__block__rect {
-  width: 100%;
-  height: auto;
-  padding: 20px 10px;
-  border-radius: var(--border-radius);
-  background-color: white;
-  color: var(--background-start-rgb);
+.opacity-0 {
+  opacity: 0;
 }
 
-.container__block__multiple-choice {
-  width: 20px;
-  height: 20px;
-  padding: 20px;
-  text-align: center;
-  border-radius: 50%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all .5s ease-in-out;
+@media(min-width: 700px){
+  .container {
+    justify-content: start;
+    align-items: center;
+  }
+
+  .container--distant {
+    margin-top: 6rem;
+  }
+
+  .container--row {
+    justify-content: center;
+  }
+
 }

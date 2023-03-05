@@ -1,20 +1,18 @@
 import Timer from "@/components/Timer"
 import FlyUpInOut from "@/animation/FlyUpInOut"
 import MultipleChoice from "@/components/MultipleChoice"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect, useReducer } from "react"
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
-import { TransitionContext } from "@/context/TransitionContext";
+import { dispatcherContext } from "@/context/TransitionDispatcher";
 import FlyDownOut from "@/animation/FlyDownOut";
 
 export default function quiz() {
     const [el, setEl] = useState();
-    const [data, dispatch] = useContext(TransitionContext)
+    const [data, dispatch] = useContext(dispatcherContext);
 
     useIsomorphicEffect(() => {
         const elRect = document.getElementById('timer').getBoundingClientRect();
         setEl(elRect);
-
-        return () => dispatch({ type: 'SET_GETOUT', getOut: false })
     }, [])
 
     return (

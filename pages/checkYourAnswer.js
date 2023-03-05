@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { TransitionContext } from '@/context/TransitionContext'
+import { useContext, useReducer } from 'react'
+import { dispatcherContext } from '@/context/TransitionDispatcher';
 import { useIsomorphicEffect } from '@/animation/useIsomophicEffect';
 import { gsap } from 'gsap';
 import CheckAnswCard from '@/components/CheckAnswCard';
@@ -7,7 +7,7 @@ import CheckIcon from '../assets/check.svg';
 import CrossIcon from '../assets/cross.png';
 
 function checkYourAnswer() {
-    const [data] = useContext(TransitionContext);
+    const [data, dispatcher] = useContext(dispatcherContext);
     const getLastData = data.choosed[data.choosed.length - 1];
     const flipCardTl = gsap.timeline();
 

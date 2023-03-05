@@ -4,7 +4,7 @@ import { useContext, useRef } from "react";
 import { useIsomorphicEffect } from "./useIsomophicEffect";
 
 export default function AnimateInOut({ children, durationIn, durationOut, to, from, delayIn, delayOut, set, skipOutro, ease, className }) {
-    const [data, dispatch] = useContext(TransitionContext);
+    const { timeline } = useContext(TransitionContext);
     const ref = useRef();
 
     useIsomorphicEffect(() => {
@@ -19,13 +19,13 @@ export default function AnimateInOut({ children, durationIn, durationOut, to, fr
         })
 
         if (!skipOutro) {
-            data.timeline.add(
+            timeline.add(
                 gsap.to(ref.current, {
                     ...from,
                     duration: durationOut || 1,
                     delay: delayOut || 0,
-                    ease: ease || 'power4.in'
-                })
+                    ease: ease || 'power4.out'
+                }), 0
             )
         }
     }, [])
