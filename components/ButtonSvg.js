@@ -1,8 +1,16 @@
+import { gsap } from "gsap"
 
-function ButtonSvg({ text, id, onClick, attrText, attrPath }) {
-    
+function ButtonSvg({ text, id, onClick, attrText, attrPath, hoverId }) {
+    const zoomOut = () => {
+        gsap.to(`.${hoverId} #childBorder`, { attr: {d: 'M 70 10 L 130 10 A 1 1 0 0 1 130 65 L 70 65 A 1 1 0 0 1 70 10 Z'}, duration: 0.4})
+    }
+
+    const zoomIn = () => {
+        gsap.to(`.${hoverId} #childBorder`, { attr: {d: 'M 50 10 L 150 10 A 1 1 0 0 1 150 65 L 50 65 A 1 1 0 0 1 50 10 Z'}, duration: 0.2})
+    }
+
     return (
-        <svg id={id} width={200} height={75} onClick={onClick}>
+        <svg className={hoverId} onMouseDown={() => zoomOut()} onMouseUp={() => zoomIn()} id={id} width={200} height={75} onClick={onClick}>
             <text
                 id='childText'
                 x='50%'

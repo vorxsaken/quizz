@@ -23,13 +23,15 @@ export default function Home() {
     <div className='container'>
       <div className='container container--distant container--full container__block text-white text-medium'>
         <div className='container container--attached'>
-          <div className='container text-small'>
-            chuaxx
-          </div>
           <div className='container container--row container--attached-md container__block text-white'>
             {
               text.map((word, index) => (
-                <FlyUpInOut key={index} className={'text-xl opacity-0'} delayIn={0.05 * index} delayOut={0.03 * index}>
+                <FlyUpInOut
+                  key={index}
+                  className={'text-xl opacity-0'}
+                  delayIn={0.05 * index}
+                  delayOut={0.02 * index}
+                >
                   {word}
                 </FlyUpInOut>
               ))
@@ -39,6 +41,7 @@ export default function Home() {
         <div className='container container--attached'>
           <ButtonSvg
             id={'cont'}
+            hoverId={'start'}
             text={'start'}
             onClick={() => toQuiz()}
             attrText={{ opacity: 0 }}
@@ -46,6 +49,7 @@ export default function Home() {
           />
           <ButtonSvg
             id={'cont'}
+            hoverId={'about'}
             text={'about'}
             onClick={() => transformBorderAndTextSvg('#cont', false)}
             attrText={{ opacity: 0 }}
