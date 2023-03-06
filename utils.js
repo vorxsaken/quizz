@@ -11,7 +11,7 @@ export function randomColor() {
 export const transformBorderAndTextSvg = (id, animatedOnMounted) => {
     return new Promise(resolve => {
         const elArray = gsap.utils.toArray(id);
-        const transformTL = gsap.timeline({ paused: true });
+        const transformTL = gsap.timeline({ paused: true, delay: 0.2 });
         let query = null;
         let counter = 0;
 
@@ -19,8 +19,8 @@ export const transformBorderAndTextSvg = (id, animatedOnMounted) => {
             elArray.forEach((el) => {
                 query = gsap.utils.selector(el);
                 transformTL
-                    .fromTo(query('#childText'), { y: -3, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, counter)
-                    .fromTo(query('#childBorder'), { strokeDashoffset: 390 }, { strokeDashoffset: 0, duration: 0.5 }, '<0.1')
+                    .fromTo(query('#childText'), { y: -5, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, counter)
+                    .fromTo(query('#childBorder'), { strokeDashoffset: 390 }, { strokeDashoffset: 0, duration: 0.8 }, '<0.1')
 
                 counter += 0.1
             })
@@ -31,8 +31,8 @@ export const transformBorderAndTextSvg = (id, animatedOnMounted) => {
         elArray.forEach((el) => {
             query = gsap.utils.selector(el);
             transformTL
-                .to(query('#childText'), { y: 3, opacity: 0, duration: 0.5 }, counter)
-                .to(query('#childBorder'), { strokeDashoffset: 390, duration: 0.5 }, '<0.1')
+                .to(query('#childText'), { y: 5, opacity: 0, duration: 0.3 }, counter)
+                .to(query('#childBorder'), { strokeDashoffset: 390, duration: 0.8 }, '<0.1')
 
             counter += 0.1;
         })
