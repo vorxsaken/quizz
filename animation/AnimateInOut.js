@@ -3,7 +3,20 @@ import { TransitionContext } from "@/context/TransitionContext";
 import { useContext, useRef } from "react";
 import { useIsomorphicEffect } from "./useIsomophicEffect";
 
-export default function AnimateInOut({ children, durationIn, durationOut, to, from, delayIn, delayOut, set, skipOutro, ease, className }) {
+export default function AnimateInOut({ 
+    children, 
+    durationIn, 
+    durationOut, 
+    to, 
+    from, 
+    delayIn, 
+    delayOut, 
+    set, 
+    skipOutro, 
+    ease, 
+    className, 
+    onCompleate 
+}) {
     const { timeline } = useContext(TransitionContext);
     const ref = useRef();
 
@@ -24,7 +37,10 @@ export default function AnimateInOut({ children, durationIn, durationOut, to, fr
                     ...from,
                     duration: durationOut || 1,
                     delay: delayOut || 0,
-                    ease: ease || 'power4.out'
+                    ease: ease || 'power4.out',
+                    onComplete: () => {
+                        ref.current.style = onCompleate
+                    }
                 }), 0
             )
         }
