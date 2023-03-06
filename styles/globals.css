@@ -75,6 +75,20 @@ a {
   gap: 0px;
 }
 
+.container--relative {
+  position: relative;
+}
+
+.container--absolute {
+  position: absolute;
+}
+
+.container__slice {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: rotateY(90deg);
+  opacity: 0;
+}
 .container--attached-md {
   gap: 0.2rem;
 }
@@ -199,7 +213,7 @@ a {
 }
 
 .opacity-0 {
-  opacity: 0;
+  visibility: hidden;
 }
 
 @media(min-width: 700px){
