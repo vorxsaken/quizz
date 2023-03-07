@@ -1,8 +1,9 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 const globalData = {
     getOut: false,
-    choosed: []
+    choosed: [],
+    questions: []
 }
 
 const reducer = (state, action) => {
@@ -25,11 +26,17 @@ const reducer = (state, action) => {
                     }
                 ]
             }
+        case 'SET_QUESTIONS':
+            return {
+                ...state,
+                questions: [...action.questions]
+            }
         default:
             return state;
     }
 }
-export const dispatcherContext = createContext({});
+const dispatcherContext = createContext({});
+export const useTranstionReducer = () => useContext(dispatcherContext);
 
 export default function TransitionDispatcher({ children }) {
     return (

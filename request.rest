@@ -1,1 +1,1 @@
-GET https://the-trivia-api.com/api/questions?categories=general_knowledge,film_and_tv,arts_and_literature,geography,history,science,society_and_culture&limit=10
+GET https://the-trivia-api.com/api/questions?categories=science&limit=10

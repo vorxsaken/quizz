@@ -11,7 +11,12 @@ export default function Home() {
 
   const toQuiz = () => {
     transformBorderAndTextSvg('#cont', false).then(() => {
-      router.push('/quiz')
+      fetch('https://the-trivia-api.com/api/questions?categories=science&limit=10')
+        .then(result => result.json())
+        .then(json => {
+          localStorage.setItem('quiz', JSON.stringify(json))
+        })
+      // router.push('/countDown')
     })
   }
 
@@ -39,6 +44,14 @@ export default function Home() {
           </div>
         </div>
         <div className='container container--attached'>
+        <ButtonSvg
+            id={'cont'}
+            hoverId={'resume'}
+            text={'resume'}
+            onClick={() => toQuiz()}
+            attrText={{ opacity: 0 }}
+            attrPath={{ strokeDashoffset: 390 }}
+          />
           <ButtonSvg
             id={'cont'}
             hoverId={'start'}

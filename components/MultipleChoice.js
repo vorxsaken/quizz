@@ -1,16 +1,16 @@
 import { randomColor } from "@/utils"
-import { useContext, useReducer, useState } from "react"
+import {  useState } from "react"
 import RotateAndOpacityIn from "@/animation/RotateAndOpacityIn"
 import ScaleIn from "@/animation/ScaleIn"
 import { gsap } from "gsap"
-import { dispatcherContext } from "@/context/TransitionDispatcher"
+import { useTranstionReducer } from "@/context/TransitionDispatcher"
 import { useRouter } from "next/router"
 
 export default function MultipleChoice({ el }) {
     // change this to dinamic array when other components done
     // data should return by api calls
 
-    const [data, dispatch] = useContext(dispatcherContext)
+    const [data, dispatch] = useTranstionReducer();
     const [choices, setChoices] = useState(['Leopard', 'Turtle', 'Cheetah', 'Lion'])
     const Alpha = ['A', 'B', 'C', 'D'];
     const router = useRouter();
