@@ -5,38 +5,39 @@ import blob4 from "../assets/blob4.png";
 import Image from 'next/image';
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 import { gsap } from 'gsap';
+import { randomNumber } from "@/utils";
 
 export default function Background() {
     
     useIsomorphicEffect(() => {
         const timeLine = gsap.timeline({ repeat: -1, repeatDelay: 0.5, yoyo: true });
         timeLine.to('#blob1', {
-            x: Math.floor(Math.random() * 800),
-            y: Math.floor(Math.random() * 500),
+            x: randomNumber(800),
+            y: randomNumber(500),
             rotate: 360,
             duration: 10,
             ease: "power1.inOut"
         })
 
         timeLine.to('#blob2', {
-            x: Math.floor(Math.random() * 1000),
-            y: -Math.floor(Math.random() * 800),
+            x: randomNumber(1000),
+            y: randomNumber(-800),
             rotate: 360,
             duration: 15,
             ease: "power1.inOut"
         }, '<')
 
         timeLine.to('#blob3', {
-            x: Math.floor(Math.random() * 500),
-            y: -Math.floor(Math.random() * 1000),
+            x: randomNumber(800),
+            y: randomNumber(-1000),
             rotate: 360,
             duration: 20,
             ease: "power1.inOut"
         }, '<')
 
         timeLine.to('#blob4', {
-            x: Math.floor(Math.random() * 800),
-            y: -Math.floor(Math.random() * 1000),
+            x: randomNumber(800),
+            y: randomNumber(-1000),
             rotate: 360,
             duration: 18,
             ease: "power1.inOut"

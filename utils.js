@@ -8,10 +8,25 @@ export function randomColor() {
     return color[random]
 }
 
-export const transformBorderAndTextSvg = (id, animatedOnMounted) => {
+export function randomNumber(range) {
+    return Math.floor(Math.random() * range)
+}
+
+export function saveAnswerToLocalStorage(answers){
+    let newAnswers = [...answers.map(answer => {
+        return {
+            answer: Array.isArray(answer.answear) ? answer.answear[1] : answer.answear
+        }
+    })]
+
+    // console.log(newAnswers);
+    localStorage.setItem('userAnswer', JSON.stringify(newAnswers));
+}
+
+export const transformBorderAndTextSvg = (id, animatedOnMounted, delay) => {
     return new Promise(resolve => {
         const elArray = gsap.utils.toArray(id);
-        const transformTL = gsap.timeline({ paused: true, delay: 0.2 });
+        const transformTL = gsap.timeline({ paused: true, delay: delay || 0.2 });
         let query = null;
         let counter = 0;
 

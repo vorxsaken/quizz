@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import { useIsomorphicEffect } from "./useIsomophicEffect";
 import { useRef } from "react";
 
-export default function AnimateOut({ children, to, delay, duration, stagger, getOut = false }) {
+export default function AnimateOut({ children, to, delay, duration, stagger, getOut = false, id, className, style }) {
     const ref = useRef();
 
     useIsomorphicEffect(() => {
@@ -12,13 +12,13 @@ export default function AnimateOut({ children, to, delay, duration, stagger, get
                 delay: delay || 0,
                 duration: duration || 0.5,
                 stagger: 0.1,
-                ease: 'power4.out'
+                ease: 'power4.out',
             })
         }
     }, [getOut])
 
     return (
-        <div ref={ref}>
+        <div ref={ref} id={id} className={className} style={style}>
             {children}
         </div>
     )

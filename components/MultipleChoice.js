@@ -1,23 +1,26 @@
 import { randomColor } from "@/utils"
-import {  useState } from "react"
+import { useState } from "react"
 import RotateAndOpacityIn from "@/animation/RotateAndOpacityIn"
 import ScaleIn from "@/animation/ScaleIn"
 import { gsap } from "gsap"
 import { useTranstionReducer } from "@/context/TransitionDispatcher"
 import { useRouter } from "next/router"
+import { useIsomorphicEffect } from "@/animation/useIsomophicEffect"
 
 export default function MultipleChoice({ el }) {
-    // change this to dinamic array when other components done
-    // data should return by api calls
 
     const [data, dispatch] = useTranstionReducer();
-    const [choices, setChoices] = useState(['Leopard', 'Turtle', 'Cheetah', 'Lion'])
+    const [choices, setChoices] = useState(data.questions[data.quizObserver].multipleChoice)
     const Alpha = ['A', 'B', 'C', 'D'];
     const router = useRouter();
 
-    const animateSelected = (id) => {
+    useIsomorphicEffect(() => {
+        setChoices(data.questions[data.quizObserver].multipleChoice)
+    }, [data.quizObserver])
+
+    const getChoosedCardCoordinates = (ChoiceId) => {
         // get x, y element from choice element
-        const choiceEl = document.getElementById(`choice-${id}`).getBoundingClientRect();
+        const choiceEl = document.getElementById(`choice-${ChoiceId}`).getBoundingClientRect();
         const choiceElX = choiceEl.left;
         const choiceElY = choiceEl.top;
 
@@ -39,44 +42,51 @@ export default function MultipleChoice({ el }) {
 
         // get value to set new selected rect choice fit timer element
         const point = (windowPoint / rectPoint) + 20;
+
+        return { x: rectX + point, y: rectY + point };
+    }
+
+    const storeSelectedCardToReducer = (selectedCardId) => {
+        // get selected card element 
+        const getNewChoice = document.getElementById(`choice-${selectedCardId}`).getBoundingClientRect();
+        const getAlphaEl = document.getElementById(`alpha-${selectedCardId}`);
+
+        // get background color selected card
+        const bgColor = window.getComputedStyle(getAlphaEl).backgroundColor;
+
+        // get x and y position of selected card
+        const x = getNewChoice.left;
+        const y = getNewChoice.top;
+
+        // get height and width of selected card
+        const width = getNewChoice.width;
+        const height = getNewChoice.height
+
+        // strore acquired selected card element data to context reducer
+        dispatch({
+            type: 'SET_ANSWEAR',
+            answear: [Alpha[selectedCardId], choices[selectedCardId]],
+            position: [x, y],
+            size: [width, height],
+            bgColor: bgColor
+        })
+    }
+
+    const animateSelected = (id) => {
+        const { x, y } = getChoosedCardCoordinates(id)
         dispatch({ type: 'SET_GETOUT', getOut: true });
 
         for (let x = 0; x < 4; x++) {
             if (`choice-${x}` != `choice-${id}`) {
-                gsap.to(`#choice-${x}`, {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.5,
-                    ease: 'power4.out'
-                })
+                gsap.to(`#choice-${x}`, { y: 20, opacity: 0, duration: 0.5, ease: 'power4.out' })
             }
         }
 
-        gsap.to(`#choice-${id}`, {
-            x: rectX + point,
-            y: rectY + point,
-            scale: 1.4,
-            duration: 1,
-            ease: 'power4.out',
-        }).then(() => {
-            const getNewChoice = document.getElementById(`choice-${id}`).getBoundingClientRect();
-            const getAlphaEl = document.getElementById(`alpha-${id}`);
-            const bgColor = window.getComputedStyle(getAlphaEl).backgroundColor;
-            const x = getNewChoice.left;
-            const y = getNewChoice.top;
-            const width = getNewChoice.width;
-            const height = getNewChoice.height
-
-            dispatch({
-                type: 'SET_ANSWEAR',
-                answear: [Alpha[id], choices[id]],
-                position: [x, y],
-                size: [width, height],
-                bgColor: bgColor
+        gsap.to(`#choice-${id}`, { x: x, y: y, scale: 1.4, duration: 1, ease: 'power4.out', })
+            .then(() => {
+                storeSelectedCardToReducer(id);
+                router.replace('/checkYourAnswer');
             })
-
-            router.replace('/checkYourAnswer');
-        })
     }
 
     return (
@@ -89,12 +99,17 @@ export default function MultipleChoice({ el }) {
                         id={`choice-${index}`}
                         onClick={() => animateSelected(index)}>
                         <RotateAndOpacityIn
+                            skipOutro={data.skipOutro}
                             delayIn={0.1 * (index + 1)}
+                            delayOut={0.1}
+                            durationOut={0.5}
                             className="container__block__rect"
                         >
                             <ScaleIn
+                                skipOutro={data.skipOutro}
                                 delayIn={0.8}
                                 durationIn={0.5}
+                                durationOut={0.5}
                                 className="container container__block text-small"
                             >
                                 <div
@@ -104,7 +119,7 @@ export default function MultipleChoice({ el }) {
                                 >
                                     {Alpha[index]}
                                 </div>
-                                <span>{choice}</span>
+                                <span className={choice.length > 21 ? 'text-extra-small' : ''}>{choice}</span>
                             </ScaleIn>
                         </RotateAndOpacityIn>
                     </div>

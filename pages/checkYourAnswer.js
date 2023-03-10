@@ -4,13 +4,22 @@ import { gsap } from 'gsap';
 import CheckAnswCard from '@/components/CheckAnswCard';
 import CheckIcon from '../assets/check.svg';
 import CrossIcon from '../assets/cross.png';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import FlyDownOut from '@/animation/FlyDownOut';
+import { saveAnswerToLocalStorage } from '@/utils';
 
 function checkYourAnswer() {
-    const [data, dispatcher] = useTranstionReducer();
+    const [data, dispatch] = useTranstionReducer();
     const getLastData = data.choosed[data.choosed.length - 1];
+    const [isCorrect, setIsCorrect] = useState(false);
     const flipCardTl = gsap.timeline();
+    const router = useRouter();
+    const [getOut, setGetOut] = useState(false)
 
     useIsomorphicEffect(() => {
+        const CHECK_USER_ANSWER = getLastData.answear[1] == data.questions[data.choosed.length - 1].correctAnswer;
+
         gsap.set('#cardCont', {
             transformStyle: 'preserve-3d',
             transformPerspective: 1000
@@ -29,13 +38,28 @@ function checkYourAnswer() {
             rotationY: -180
         })
 
-        flipCardTl.to('#cardFront', {duration: 1.3, rotationY: 180, ease: 'back.inOut'})
-        flipCardTl.to('#cardBack', {duration: 1.3, rotationY: 0, ease: 'back.inOut'}, 0)
+        if (CHECK_USER_ANSWER) setIsCorrect(true);
 
-    })
+        flipCardTl.to('#cardFront', { duration: 1.3, rotationY: 180, ease: 'back.inOut' })
+        flipCardTl.to('#cardBack', { duration: 1.3, rotationY: 0, ease: 'back.inOut' }, 0).then(() => {
+            setGetOut(true);
+            let quizObserver = data.quizObserver + 1;
+            saveAnswerToLocalStorage(data.choosed);
+            setTimeout(() => {
+                dispatch({ type: 'SET_GETOUT', getOut: false })
+                if (data.quizObserver === data.questions.length - 1) {
+                    router.replace('/result')
+                } else {
+                    router.replace('/quiz').then(() => {
+                        dispatch({ type: 'UPDATE_OBSERVER', quizObserver: quizObserver });
+                    })
+                }
+            }, 500)
+        })
+    }, [])
 
     return (
-        <div id='cardCont' className='container' style={{ position: 'fixed' }}>
+        <FlyDownOut duration={0.4} getOut={getOut} id='cardCont' className='container' style={{ position: 'fixed' }}>
             <CheckAnswCard
                 id={'cardFront'}
                 width={getLastData.size[0] - 61}
@@ -48,9 +72,9 @@ function checkYourAnswer() {
                 id={'cardBack'}
                 width={getLastData.size[0] - 61}
                 height={getLastData.size[1]}
-                icon={CrossIcon}
+                icon={isCorrect ? CheckIcon : CrossIcon}
             />
-        </div>
+        </FlyDownOut>
     )
 }
 

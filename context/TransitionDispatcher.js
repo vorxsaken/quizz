@@ -1,9 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
+import update from "react-addons-update";
 
 const globalData = {
     getOut: false,
     choosed: [],
-    questions: []
+    questions: [],
+    quizObserver: 0,
+    skipOutro: true,
 }
 
 const reducer = (state, action) => {
@@ -30,6 +33,29 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 questions: [...action.questions]
+            }
+        case 'SET_SKIPOUTRO':
+            return {
+                ...state,
+                skipOutro: action.skipOutro
+            }
+        case 'UPDATE_OBSERVER':
+            return {
+                ...state,
+                quizObserver: action.quizObserver
+            }
+        case 'RESET_ANSWER':
+            return {
+                ...state,
+                choosed: []
+            }
+        case 'RESET_REDUCER':
+            return {
+                getOut: false,
+                choosed: [],
+                questions: [],
+                quizObserver: 0,
+                skipOutro: true,
             }
         default:
             return state;

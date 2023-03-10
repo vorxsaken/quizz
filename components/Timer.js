@@ -2,16 +2,21 @@ import { useState } from "react"
 import { gsap } from "gsap";
 import { useInterval } from "@/utils";
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
+import Circle from "./Circle";
+import { useRouter } from "next/router";
+import { useTranstionReducer } from "@/context/TransitionDispatcher";
 
-export default function Timer() {
-    const [time, setTime] = useState(5);
+export default function Timer({ getOut }) {
+    const [time, setTime] = useState(3);
     const [isStart, setIsStart] = useState(false);
     const [delay, setDelay] = useState(1000);
+    const [data, dispatch] = useTranstionReducer();
+    const router = useRouter();
     gsap.ticker.lagSmoothing(0);
 
     useInterval(() => {
         if (isStart) setTime(time - 1);
-        if (time < 2) setDelay(null);
+        if (time < 1) setDelay(null);
     }, delay)
 
     useIsomorphicEffect(() => {
@@ -39,53 +44,37 @@ export default function Timer() {
                 setIsStart(true);
             }
         })
+
     }, [])
+
+    useIsomorphicEffect(() => {
+        if (!getOut) {
+            if (time < 0) {
+                dispatch({ type: 'SET_SKIPOUTRO', skipOutro: false })
+                router.replace('/getNextQuestion')
+            }
+        }
+    }, [time])
 
     return (
         <>
-            <svg width="150" height="150">
-                <path
-                    id="bgTimerCircle"
-                    d="M 75 10 A 1 1 0 0 0 75 140 A 1 1 0 0 0 75 10 Z"
-                    stroke="gray"
-                    strokeDasharray={500}
-                    strokeDashoffset={500}
-                    strokeWidth={4}
-                    strokeLinecap="round"
-                    fill="none">
-                </path>
-                <text
-                    x="52"
-                    y="83"
-                    strokeDasharray={900}
-                    fill="white"
-                >
-                    {time.toString().length > 1 ? `0:${time}` : `0:0${time}`}
-                </text>
-                <defs>
-                    <linearGradient
-                        id="grad1"
-                        x1="30%"
-                        x2="100%"
-                        y1="0%"
-                        y2="0%"
-                    >
-                        <stop offset="0%" style={{ stopColor: "rgb(214, 19, 85)", stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: "rgb(249, 74, 41)", stopOpacity: 1 }} />
-                    </linearGradient>
-                </defs>
-                <path
-                    id="timerCircle"
-                    d="M 75 10 A 1 1 0 0 0 75 140 A 1 1 0 0 0 75 10 Z"
-                    strokeLinecap="round"
-                    strokeDasharray={500}
-                    strokeDashoffset={500}
-                    stroke="url(#grad1)"
-                    strokeWidth={12}
-                    fill="none"
-                >
-                </path>
-            </svg>
+            <Circle
+                bgCircleId={"bgTimerCircle"}
+                bgDashArray={500}
+                bgDashOffset={500}
+                bgStrokeWidth={4}
+                bgColor={'gray'}
+                text={
+                    time > 0 ? time.toString().length > 1 ? `0:${time}` : `0:0${time}` : '0:00'
+                }
+                textColor={'white'}
+                circleId={"timerCircle"}
+                dashArray={500}
+                dashOffset={500}
+                strokeWidth={12}
+                gradientStart={{ stopColor: "rgb(214, 19, 85)", stopOpacity: 1 }}
+                gradientStop={{ stopColor: "rgb(249, 74, 41)", stopOpacity: 1 }}
+            />
         </>
     )
 }

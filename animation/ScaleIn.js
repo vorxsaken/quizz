@@ -1,14 +1,16 @@
 import AnimateInOut from "./AnimateInOut"
 
-function Scale({ children, delayIn, delayOut, durationIn, durationOut, className }) {
+function Scale({ children, delayIn, skipOutro, from, delayOut, durationIn, durationOut, className }) {
     return (
         <AnimateInOut
             set={{ scale: 0, opacity: 0 }}
             to={{ scale: 1, opacity: 1 }}
-            skipOutro={true}
+            from={{scale: 0, opacity: 0}}
+            skipOutro={skipOutro}
             delayIn={delayIn}
             durationIn={durationIn}
             className={className}
+            onCompleate={'display: none'}
         >
             {children}
         </AnimateInOut>

@@ -20,7 +20,8 @@ export default function quiz() {
             <FlyDownOut getOut={data.getOut}>
                 <FlyUpInOut
                     delayIn={0.5}
-                    skipOutro={true}
+                    delayOut={0.4}
+                    skipOutro={data.skipOutro}
                     className={"container container--title container__block text-white text-medium"}>
                     Gabut Quizz
                 </FlyUpInOut>
@@ -28,18 +29,20 @@ export default function quiz() {
             <FlyDownOut getOut={data.getOut}>
                 <FlyUpInOut
                     delayIn={0.6}
-                    skipOutro={true}
+                    delayOut={0.3}
+                    skipOutro={data.skipOutro}
                     className={"container container__block text-white text-medium"}>
-                    what is the fastest animal in the world ?
+                    {data.questions[data.quizObserver].question}
                 </FlyUpInOut>
             </FlyDownOut>
             <span id="timer">
                 <FlyDownOut getOut={data.getOut}>
                     <FlyUpInOut
                         delayIn={0.7}
-                        skipOutro={true}
+                        delayOut={0.2}
+                        skipOutro={data.skipOutro}
                         className="container container--row container__block text-white text-base">
-                        <Timer />
+                        <Timer getOut={data.getOut} />
                     </FlyUpInOut>
                 </FlyDownOut>
             </span>

@@ -89,6 +89,7 @@ a {
   transform: rotateY(90deg);
   opacity: 0;
 }
+
 .container--attached-md {
   gap: 0.2rem;
 }
@@ -149,18 +150,47 @@ a {
   justify-content: center;
   align-items: center;
   transition: all .5s ease-in-out;
+  overflow: hidden;
 }
 
+.container__card {
+  width: clamp(300px, 50%, 600px);
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(25px);
+  border-radius: 10px;
+}
 
+.container--justify-start {
+  justify-content: start;
+}
+
+.container--max-width-md {
+  max-width: 300px;
+}
+.px-none {
+  padding: 0px 10px;
+}
+
+.px-big {
+  padding: 10px 30px;
+}
+
+.px-medium {
+  padding: 10px 20px;
+}
+
+.py-none {
+  padding: 0px 10px; 
+}
 .shape-background {
   overflow: hidden;
-  ;
   position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: 0;
   opacity: 20%;
-  filter: blur(5px);
+  filter: blur(2px);
 }
 
 .shape {
@@ -197,7 +227,11 @@ a {
 }
 
 .text-small {
-  font-size: 1rem
+  font-size: 1rem;
+}
+
+.text-extra-small {
+  font-size: 0.5rem;
 }
 
 .text-white {
@@ -212,11 +246,15 @@ a {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .opacity-0 {
   visibility: hidden;
 }
 
-@media(min-width: 700px){
+@media(min-width: 700px) {
   .container {
     justify-content: start;
     align-items: center;

@@ -1,9 +1,9 @@
 import AnimateOut from "./AnimateOut"
 
-function FlyDownOut({ children, duration, delay, getOut, className, id, style }) {
+function ScaleOut({ children, duration, delay, getOut, className, id, style }) {
     return (
         <AnimateOut
-            to={{ yPercent: 50, opacity: 0 }}
+            to={{ scale: 0, opacity: 0 }}
             duration={duration}
             delay={delay}
             getOut={getOut}
@@ -16,4 +16,4 @@ function FlyDownOut({ children, duration, delay, getOut, className, id, style })
     )
 }
 
-export default FlyDownOut
+export default ScaleOut
