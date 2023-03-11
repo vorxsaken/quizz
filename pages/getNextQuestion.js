@@ -35,6 +35,7 @@ function getNextQuestion() {
                     router.replace('/result')
                 } else {
                     dispatch({ type: 'UPDATE_OBSERVER', quizObserver: quizObserver });
+                    localStorage.setItem('quizObserver', quizObserver);
                     router.replace('/quiz')
                 }
 

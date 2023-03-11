@@ -52,14 +52,15 @@ function checkYourAnswer() {
                 } else {
                     router.replace('/quiz').then(() => {
                         dispatch({ type: 'UPDATE_OBSERVER', quizObserver: quizObserver });
+                        localStorage.setItem('quizObserver', quizObserver);
                     })
                 }
-            }, 500)
+            }, 900)
         })
     }, [])
 
     return (
-        <FlyDownOut duration={0.4} getOut={getOut} id='cardCont' className='container' style={{ position: 'fixed' }}>
+        <FlyDownOut duration={0.8} getOut={getOut} id='cardCont' className='container' style={{ position: 'fixed' }}>
             <CheckAnswCard
                 id={'cardFront'}
                 width={getLastData.size[0] - 61}

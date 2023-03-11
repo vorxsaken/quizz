@@ -48,6 +48,7 @@ export default function Home() {
           const newQuestion = getQuestionsArray(json);
           const quiz = [ ...newQuestion];
           localStorage.setItem('quiz', JSON.stringify(quiz));
+          localStorage.setItem('quizObserver', 0);
           localStorage.removeItem('userAnswer');
           dispatch({type: 'SET_QUESTIONS', questions: quiz});
           router.push('/quiz')
