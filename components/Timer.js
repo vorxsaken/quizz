@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 
 export default function Timer({ getOut }) {
-    const [time, setTime] = useState(3);
+    const [time, setTime] = useState(10);
     const [isStart, setIsStart] = useState(false);
     const [delay, setDelay] = useState(1000);
     const [data, dispatch] = useTranstionReducer();
