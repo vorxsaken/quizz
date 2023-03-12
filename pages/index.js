@@ -1,6 +1,5 @@
-import Link from 'next/link'
 import { useIsomorphicEffect } from '@/animation/useIsomophicEffect';
-import { transformBorderAndTextSvg, randomNumber } from '@/utils';
+import { transformBorderAndTextSvg } from '@/utils';
 import ButtonSvg from '@/components/ButtonSvg';
 import FlyUpInOut from '@/animation/FlyUpInOut';
 import { useRouter } from 'next/router';
@@ -13,53 +12,10 @@ export default function Home() {
   const [data, dispatch] = useTranstionReducer();
   const [quiz, setQuiz] = useState(null);
   const [isLoaded, setisLoaded] = useState(false);
-  const THE_API_URL = 'https://the-trivia-api.com/api/questions?limit=10&tags=islam,japan,cartoons,disney,southeast_asia,young_adult,animals,technology,religion'
 
-  const getQuestionsArray = (questionArrayOfObject) => {
-    let questionArray = [];
-
-    questionArrayOfObject.forEach(question => {
-      const multipleChoiceArray = [...question.incorrectAnswers, question.correctAnswer];
-      var newMultipleChoice = [];
-
-      for (let i = 0; i < 100; i++) {
-        let ranNum = randomNumber(4);
-        if (!newMultipleChoice.some(choice => choice == multipleChoiceArray[ranNum])) {
-          newMultipleChoice.push(multipleChoiceArray[ranNum]);
-          if (newMultipleChoice.length == 4) break;
-        }
-      }
-
-      questionArray.push({
-        multipleChoice: newMultipleChoice,
-        correctAnswer: question.correctAnswer,
-        question: question.question
-      })
-    })
-
-    return questionArray;
-  }
-
-  const toQuiz = () => {
-    dispatch({ type: 'RESET_REDUCER' });
+  const Link = (link) => {
     transformBorderAndTextSvg('#cont', false).then(() => {
-      fetch(THE_API_URL)
-        .then(result => result.json())
-        .then(json => {
-          const newQuestion = getQuestionsArray(json);
-          const quiz = [...newQuestion];
-          localStorage.setItem('quiz', JSON.stringify(quiz));
-          localStorage.setItem('quizObserver', 0);
-          localStorage.removeItem('userAnswer');
-          dispatch({ type: 'SET_QUESTIONS', questions: quiz });
-          router.push('/countDown')
-        })
-    })
-  }
-
-  const toAbout = () => {
-    transformBorderAndTextSvg('#cont', false).then(() => {
-      router.push('/about')
+      router.push(link)
     })
   }
 
@@ -102,7 +58,7 @@ export default function Home() {
                   id={'cont'}
                   hoverId={'resume'}
                   text={'resume'}
-                  onClick={() => console.log(data.questions)}
+                  onClick={() => Link('/countDown/true')}
                   attrText={{ opacity: 0 }}
                   attrPath={{ strokeDashoffset: 390 }}
                 />
@@ -112,7 +68,7 @@ export default function Home() {
               id={'cont'}
               hoverId={'start'}
               text={'start'}
-              onClick={() => toQuiz()}
+              onClick={() => Link('/countDown/false')}
               attrText={{ opacity: 0 }}
               attrPath={{ strokeDashoffset: 390 }}
             />
@@ -120,7 +76,7 @@ export default function Home() {
               id={'cont'}
               hoverId={'about'}
               text={'about'}
-              onClick={() => toAbout()}
+              onClick={() => Link('/about')}
               attrText={{ opacity: 0 }}
               attrPath={{ strokeDashoffset: 390 }}
             />

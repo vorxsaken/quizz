@@ -3,6 +3,8 @@ import FlyUpInOut from "@/animation/FlyUpInOut"
 import ButtonSvg from "@/components/ButtonSvg"
 import { useState } from "react"
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
+import { useTranstionReducer } from "@/context/TransitionDispatcher";
+import { useRouter } from "next/router";
 
 function result() {
     const [question, setQuestion] = useState([]);
@@ -10,6 +12,18 @@ function result() {
     const [greetMessage, setGreetMessage] = useState('');
     const [correctPoint, setCorrectPoint] = useState(0);
     const [correctPercentage, setCorrectPercentage] = useState(0);
+    const [data, dispatch] = useTranstionReducer();
+    const router = useRouter();
+
+    const cleanData = () => {
+        // remove local storage data
+        localStorage.removeItem('quiz');
+        localStorage.removeItem('userAnswer');
+        localStorage.removeItem('quizObserver');
+
+        // remove context data
+        dispatch({type: 'RESET_REDUCER'});
+    }
 
     useIsomorphicEffect(() => {
         // get data from local storage
@@ -43,6 +57,10 @@ function result() {
         setQuestion(questions);
         setAnswers(answers);
         setCorrectPoint(point);
+
+        // clean all saved data
+        cleanData();
+
     }, [])
 
     return (
@@ -110,6 +128,7 @@ function result() {
                         id={'cont'}
                         hoverId={'again'}
                         text={'Again'}
+                        onClick={() => router.replace('/countDown/false')}
                         attrText={{ opacity: 1 }}
                         attrPath={{ strokeDashoffset: 0 }}
                     />
