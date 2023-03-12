@@ -13,6 +13,7 @@ export default function Home() {
   const [data, dispatch] = useTranstionReducer();
   const [quiz, setQuiz] = useState(null);
   const [isLoaded, setisLoaded] = useState(false);
+  const THE_API_URL = 'https://the-trivia-api.com/api/questions?limit=10&tags=islam,japan,cartoons,disney,southeast_asia,young_adult,animals,technology,religion'
 
   const getQuestionsArray = (questionArrayOfObject) => {
     let questionArray = [];
@@ -21,11 +22,11 @@ export default function Home() {
       const multipleChoiceArray = [...question.incorrectAnswers, question.correctAnswer];
       var newMultipleChoice = [];
 
-      for(let i = 0; i < 100; i++){
+      for (let i = 0; i < 100; i++) {
         let ranNum = randomNumber(4);
         if (!newMultipleChoice.some(choice => choice == multipleChoiceArray[ranNum])) {
           newMultipleChoice.push(multipleChoiceArray[ranNum]);
-          if(newMultipleChoice.length == 4) break;
+          if (newMultipleChoice.length == 4) break;
         }
       }
 
@@ -40,19 +41,25 @@ export default function Home() {
   }
 
   const toQuiz = () => {
-    dispatch({type: 'RESET_REDUCER'});
+    dispatch({ type: 'RESET_REDUCER' });
     transformBorderAndTextSvg('#cont', false).then(() => {
-      fetch('https://the-trivia-api.com/api/questions?limit=10&tags=islam,japan,cartoons,disney,southeast_asia,football,young_adult,animals')
+      fetch(THE_API_URL)
         .then(result => result.json())
         .then(json => {
           const newQuestion = getQuestionsArray(json);
-          const quiz = [ ...newQuestion];
+          const quiz = [...newQuestion];
           localStorage.setItem('quiz', JSON.stringify(quiz));
           localStorage.setItem('quizObserver', 0);
           localStorage.removeItem('userAnswer');
-          dispatch({type: 'SET_QUESTIONS', questions: quiz});
-          router.push('/quiz')
+          dispatch({ type: 'SET_QUESTIONS', questions: quiz });
+          router.push('/countDown')
         })
+    })
+  }
+
+  const toAbout = () => {
+    transformBorderAndTextSvg('#cont', false).then(() => {
+      router.push('/about')
     })
   }
 
@@ -113,7 +120,7 @@ export default function Home() {
               id={'cont'}
               hoverId={'about'}
               text={'about'}
-              onClick={() => transformBorderAndTextSvg('#cont', false)}
+              onClick={() => toAbout()}
               attrText={{ opacity: 0 }}
               attrPath={{ strokeDashoffset: 390 }}
             />
