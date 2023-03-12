@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer } from "react";
-import update from "react-addons-update";
 
 const globalData = {
     getOut: false,

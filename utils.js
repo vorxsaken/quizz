@@ -19,7 +19,6 @@ export function saveAnswerToLocalStorage(answers){
         }
     })]
 
-    // console.log(newAnswers);
     localStorage.setItem('userAnswer', JSON.stringify(newAnswers));
 }
 
