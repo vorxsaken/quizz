@@ -15,7 +15,7 @@ function GetNextQuestion() {
 
     useLayoutEffect(() => {
         if (isMounted) {
-            const quizObserver = data.quizObserver + 1;
+            const quizObserver = data?.quizObserver + 1;
             dispatch({ type: 'SET_SKIPOUTRO', skipOutro: true });
             const dispatchBlankAnswear = {
                 answear: 'ngalamun kah bro ? 😂',
@@ -29,9 +29,9 @@ function GetNextQuestion() {
                 ...dispatchBlankAnswear
             })
 
-            saveAnswerToLocalStorage([...data.choosed, dispatchBlankAnswear]);
+            saveAnswerToLocalStorage([...data?.choosed, dispatchBlankAnswear]);
             setTimeout(() => {
-                if (data.quizObserver === data.questions.length - 1) {
+                if (data?.quizObserver === data?.questions?.length - 1) {
                     router.replace('/result')
                 } else {
                     dispatch({ type: 'UPDATE_OBSERVER', quizObserver: quizObserver });

@@ -17,32 +17,32 @@ export default function Quiz() {
 
     return (
         <div className="container">
-            <FlyDownOut getOut={data.getOut}>
+            <FlyDownOut getOut={data?.getOut}>
                 <FlyUpInOut
                     delayIn={0.5}
                     delayOut={0.4}
-                    skipOutro={data.skipOutro}
+                    skipOutro={data?.skipOutro}
                     className={"container container--title container__block text-white text-medium"}>
                     Gabut Quizz
                 </FlyUpInOut>
             </FlyDownOut>
-            <FlyDownOut getOut={data.getOut}>
+            <FlyDownOut getOut={data?.getOut}>
                 <FlyUpInOut
                     delayIn={0.6}
                     delayOut={0.3}
-                    skipOutro={data.skipOutro}
+                    skipOutro={data?.skipOutro}
                     className={"container container__block text-white text-medium"}>
-                    {data.questions[data.quizObserver].question}
+                    {data?.questions[data?.quizObserver]?.question}
                 </FlyUpInOut>
             </FlyDownOut>
             <span id="timer">
-                <FlyDownOut getOut={data.getOut}>
+                <FlyDownOut getOut={data?.getOut}>
                     <FlyUpInOut
                         delayIn={0.7}
                         delayOut={0.2}
-                        skipOutro={data.skipOutro}
+                        skipOutro={data?.skipOutro}
                         className="container container--row container__block text-white text-base">
-                        <Timer getOut={data.getOut} />
+                        <Timer getOut={data?.getOut} />
                     </FlyUpInOut>
                 </FlyDownOut>
             </span>
