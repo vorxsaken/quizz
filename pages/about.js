@@ -22,9 +22,11 @@ function about() {
                 <Scale delayOut={0.1} delayIn={0.9} className='text-xl'>
                     <AiFillTwitterCircle></AiFillTwitterCircle>
                 </Scale>
-                <Scale delayOut={0.1} delayIn={0.9} className='text-xl'>
-                    <AiFillGithub></AiFillGithub>
-                </Scale>
+                <a href='https://github.com/vorxsaken/' target='_blank'>
+                    <Scale delayOut={0.1} delayIn={0.9} className='text-xl'>
+                        <AiFillGithub></AiFillGithub>
+                    </Scale>
+                </a>
             </FlyUpInOut>
             <FlyUpInOut delayIn={0.8} className="container container--max-width-md container__card text-small">
                 vorxsaken&#169; 2023
