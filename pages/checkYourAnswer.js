@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import FlyDownOut from '@/animation/FlyDownOut';
 import { saveAnswerToLocalStorage } from '@/utils';
 
-function checkYourAnswer() {
+function CheckYourAnswer() {
     const [data, dispatch] = useTranstionReducer();
     const getLastData = data.choosed[data.choosed.length - 1];
     const [isCorrect, setIsCorrect] = useState(false);
@@ -79,4 +79,4 @@ function checkYourAnswer() {
     )
 }
 
-export default checkYourAnswer
+export default CheckYourAnswer

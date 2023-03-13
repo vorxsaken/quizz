@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useLayoutEffect, useState } from "react";
 import { saveAnswerToLocalStorage } from "@/utils";
 
-function getNextQuestion() {
+function GetNextQuestion() {
     const [data, dispatch] = useTranstionReducer();
     const router = useRouter();
     const [isMounted, setisMounted] = useState(false);
@@ -50,4 +50,4 @@ function getNextQuestion() {
     )
 }
 
-export default getNextQuestion
+export default GetNextQuestion

@@ -6,7 +6,7 @@ import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 import FlyDownOut from "@/animation/FlyDownOut";
 
-export default function quiz() {
+export default function Quiz() {
     const [el, setEl] = useState();
     const [data, dispatch] = useTranstionReducer();
 

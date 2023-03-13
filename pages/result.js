@@ -6,7 +6,7 @@ import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 import { useRouter } from "next/router";
 
-function result() {
+function Result() {
     const [question, setQuestion] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [greetMessage, setGreetMessage] = useState('');
@@ -138,4 +138,4 @@ function result() {
     )
 }
 
-export default result
+export default Result
