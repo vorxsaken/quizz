@@ -18,7 +18,7 @@ function CheckYourAnswer() {
     const [getOut, setGetOut] = useState(false)
 
     useIsomorphicEffect(() => {
-        const CHECK_USER_ANSWER = getLastData.answear[1] == data.questions[data.choosed.length - 1].correctAnswer;
+        const CHECK_USER_ANSWER = getLastData?.answear[1] == data?.questions[data?.choosed.length - 1].correctAnswer;
 
         gsap.set('#cardCont', {
             transformStyle: 'preserve-3d',
@@ -26,14 +26,14 @@ function CheckYourAnswer() {
         })
 
         gsap.set('#cardFront', {
-            x: getLastData.position[0] + 30,
-            y: getLastData.position[1],
+            x: getLastData?.position[0] + 30,
+            y: getLastData?.position[1],
             scale: 1.4,
         })
 
         gsap.set('#cardBack', {
-            x: getLastData.position[0] + 30,
-            y: getLastData.position[1],
+            x: getLastData?.position[0] + 30,
+            y: getLastData?.position[1],
             scale: 1.4,
             rotationY: -180
         })
@@ -43,11 +43,11 @@ function CheckYourAnswer() {
         flipCardTl.to('#cardFront', { duration: 1.3, rotationY: 180, ease: 'back.inOut' })
         flipCardTl.to('#cardBack', { duration: 1.3, rotationY: 0, ease: 'back.inOut' }, 0).then(() => {
             setGetOut(true);
-            let quizObserver = data.quizObserver + 1;
-            saveAnswerToLocalStorage(data.choosed);
+            let quizObserver = data?.quizObserver + 1;
+            saveAnswerToLocalStorage(data?.choosed);
             setTimeout(() => {
                 dispatch({ type: 'SET_GETOUT', getOut: false })
-                if (data.quizObserver === data.questions.length - 1) {
+                if (data?.quizObserver === data?.questions.length - 1) {
                     router.replace('/result')
                 } else {
                     router.replace('/quiz').then(() => {
