@@ -69,7 +69,7 @@ function result() {
                 <FlyUpInOut
                     durationIn={1}
                     delayOut={1.2}
-                    className="container container__block container__card opacity-0"
+                    className="container container--max-width-md container__block container__card opacity-0"
                 >
                     <Circle
                         bgDashArray={500}
@@ -89,7 +89,7 @@ function result() {
                     delayIn={0.2}
                     delayOut={1.1}
                     durationIn={1}
-                    className="container container__block container__card opacity-0"
+                    className="container container__block container--max-width-md container__card opacity-0"
                 >
                     {greetMessage}
                 </FlyUpInOut>
