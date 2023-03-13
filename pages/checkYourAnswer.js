@@ -63,16 +63,16 @@ function CheckYourAnswer() {
         <FlyDownOut duration={0.8} getOut={getOut} id='cardCont' className='container' style={{ position: 'fixed' }}>
             <CheckAnswCard
                 id={'cardFront'}
-                width={getLastData.size[0] - 61}
-                height={getLastData.size[1]}
-                bgColor={getLastData.bgColor}
-                alpha={getLastData.answear[0]}
-                answer={getLastData.answear[1]}
+                width={getLastData?.size[0] - 61}
+                height={getLastData?.size[1]}
+                bgColor={getLastData?.bgColor}
+                alpha={getLastData?.answear[0]}
+                answer={getLastData?.answear[1]}
             />
             <CheckAnswCard
                 id={'cardBack'}
-                width={getLastData.size[0] - 61}
-                height={getLastData.size[1]}
+                width={getLastData?.size[0] - 61}
+                height={getLastData?.size[1]}
                 icon={isCorrect ? CheckIcon : CrossIcon}
             />
         </FlyDownOut>
