@@ -10,13 +10,13 @@ import { useIsomorphicEffect } from "@/animation/useIsomophicEffect"
 export default function MultipleChoice({ el }) {
 
     const [data, dispatch] = useTranstionReducer();
-    const [choices, setChoices] = useState(data.questions[data.quizObserver].multipleChoice)
+    const [choices, setChoices] = useState(data?.questions[data?.quizObserver]?.multipleChoice)
     const Alpha = ['A', 'B', 'C', 'D'];
     const router = useRouter();
 
     useIsomorphicEffect(() => {
-        setChoices(data.questions[data.quizObserver].multipleChoice)
-    }, [data.quizObserver])
+        setChoices(data?.questions[data.quizObserver]?.multipleChoice)
+    }, [data?.quizObserver])
 
     const getChoosedCardCoordinates = (ChoiceId) => {
         // get x, y element from choice element
@@ -99,14 +99,14 @@ export default function MultipleChoice({ el }) {
                         id={`choice-${index}`}
                         onClick={() => animateSelected(index)}>
                         <RotateAndOpacityIn
-                            skipOutro={data.skipOutro}
+                            skipOutro={data?.skipOutro}
                             delayIn={0.1 * (index + 1)}
                             delayOut={0.1}
                             durationOut={0.5}
                             className="container__block__rect"
                         >
                             <ScaleIn
-                                skipOutro={data.skipOutro}
+                                skipOutro={data?.skipOutro}
                                 delayIn={0.8}
                                 durationIn={0.5}
                                 durationOut={0.5}
