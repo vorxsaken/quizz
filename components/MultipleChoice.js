@@ -92,7 +92,7 @@ export default function MultipleChoice({ el }) {
     return (
         <>
             {
-                choices.map((choice, index) => (
+                choices?.map((choice, index) => (
                     <div
                         className="container__block__base-rect"
                         key={choice}
