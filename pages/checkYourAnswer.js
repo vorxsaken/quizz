@@ -11,7 +11,7 @@ import { saveAnswerToLocalStorage } from '@/utils';
 
 function CheckYourAnswer() {
     const [data, dispatch] = useTranstionReducer();
-    const getLastData = data.choosed[data.choosed.length - 1];
+    const getLastData = data?.choosed[data?.choosed?.length - 1];
     const [isCorrect, setIsCorrect] = useState(false);
     const flipCardTl = gsap.timeline();
     const router = useRouter();
