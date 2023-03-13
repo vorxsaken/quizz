@@ -16,8 +16,10 @@ function CheckYourAnswer() {
     const flipCardTl = gsap.timeline();
     const router = useRouter();
     const [getOut, setGetOut] = useState(false)
-    const dataChoosedLength = data?.choosed?.length || 0;
-    const dataQuestionLength = data?.questions?.length || 0;
+    const dataChoosed = data.choosed || [];
+    const dataQuestions = data.questions || [];
+    const dataChoosedLength = dataChoosed.length || 0;
+    const dataQuestionLength = dataQuestions.length || 0;
 
     useIsomorphicEffect(() => {
         const CHECK_USER_ANSWER = getLastData?.answear[1] == data?.questions[dataChoosedLength - 1]?.correctAnswer;
