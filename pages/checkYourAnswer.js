@@ -16,9 +16,11 @@ function CheckYourAnswer() {
     const flipCardTl = gsap.timeline();
     const router = useRouter();
     const [getOut, setGetOut] = useState(false)
+    const dataChoosedLength = data?.choosed?.length || 0;
+    const dataQuestionLength = data?.questions?.length || 0;
 
     useIsomorphicEffect(() => {
-        const CHECK_USER_ANSWER = getLastData?.answear[1] == data?.questions[data?.choosed?.length - 1]?.correctAnswer;
+        const CHECK_USER_ANSWER = getLastData?.answear[1] == data?.questions[dataChoosedLength - 1]?.correctAnswer;
 
         gsap.set('#cardCont', {
             transformStyle: 'preserve-3d',
@@ -47,7 +49,7 @@ function CheckYourAnswer() {
             saveAnswerToLocalStorage(data?.choosed);
             setTimeout(() => {
                 dispatch({ type: 'SET_GETOUT', getOut: false })
-                if (data?.quizObserver === data?.questions?.length - 1) {
+                if (data?.quizObserver === dataQuestionLength - 1) {
                     router.replace('/result')
                 } else {
                     router.replace('/quiz').then(() => {
