@@ -119,7 +119,7 @@ export default function MultipleChoice({ el }) {
                                 >
                                     {Alpha[index]}
                                 </div>
-                                <span className={choice.length > 21 ? 'text-extra-small' : ''}>{choice}</span>
+                                <span className={choice.length > 18 ? 'text-extra-small' : ''}>{choice}</span>
                             </ScaleIn>
                         </RotateAndOpacityIn>
                     </div>
