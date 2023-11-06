@@ -1,10 +1,11 @@
 import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
 import FlyUpInOut from '@/animation/FlyUpInOut'
 import Scale from '@/animation/ScaleIn'
+import Layout from '@/components/Layout'
 
 function About() {
     return (
-        <div className="container text-white">
+        <Layout title={'About'} className={'text-white'}>
             <FlyUpInOut delayOut={0.9} className="container container--max-width-md container--title container__card text-base">
                 About
             </FlyUpInOut>
@@ -31,7 +32,7 @@ function About() {
             <FlyUpInOut delayIn={0.8} className="container container--max-width-md container__card text-small">
                 vorxsaken&#169; 2023
             </FlyUpInOut>
-        </div>
+        </Layout>
     )
 }
 

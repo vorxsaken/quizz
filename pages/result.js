@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 import { useRouter } from "next/router";
+import Layout from "@/components/Layout";
 
 function Result() {
     const [question, setQuestion] = useState([]);
@@ -64,7 +65,7 @@ function Result() {
     }, [])
 
     return (
-        <div className="container">
+        <Layout title={'Results'}>
             <div className="container container--title text-white text-base">
                 <FlyUpInOut
                     durationIn={1}
@@ -134,7 +135,7 @@ function Result() {
                     />
                 </FlyUpInOut>
             </div>
-        </div>
+        </Layout>
     )
 }
 

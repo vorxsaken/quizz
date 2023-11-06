@@ -5,9 +5,10 @@ import FlyUpInOut from '@/animation/FlyUpInOut';
 import { useRouter } from 'next/router';
 import { useTranstionReducer } from '@/context/TransitionDispatcher';
 import { useState } from 'react';
+import Layout from '@/components/Layout';
 
 export default function Home() {
-  const text = 'Gabut  Quizz'.split('');
+  const text = 'Quizz  Quizz'.split('');
   const router = useRouter();
   const [data, dispatch] = useTranstionReducer();
   const [quiz, setQuiz] = useState(null);
@@ -32,16 +33,16 @@ export default function Home() {
   }, [isLoaded])
 
   return (
-    <div className='container'>
+    <Layout title={'Start'}>
       {isLoaded && (
         <div className='container container--distant container--full container__block text-white text-medium'>
           <div className='container container--attached'>
-            <div className='container container--row container--attached-md container__block text-white'>
+            <div className='container container--row container--attached-md container__block text-white font-bungee'>
               {
                 text.map((word, index) => (
                   <FlyUpInOut
                     key={index}
-                    className={'text-xl opacity-0'}
+                    className={'text-2xl opacity-0'}
                     delayIn={0.05 * index}
                     delayOut={0.02 * index}
                   >
@@ -57,7 +58,7 @@ export default function Home() {
                 <ButtonSvg
                   id={'cont'}
                   hoverId={'resume'}
-                  text={'resume'}
+                  text={'Resume'}
                   onClick={() => Link('/countDown/true')}
                   attrText={{ opacity: 0 }}
                   attrPath={{ strokeDashoffset: 390 }}
@@ -67,7 +68,7 @@ export default function Home() {
             <ButtonSvg
               id={'cont'}
               hoverId={'start'}
-              text={'start'}
+              text={'Start'}
               onClick={() => Link('/countDown/false')}
               attrText={{ opacity: 0 }}
               attrPath={{ strokeDashoffset: 390 }}
@@ -75,7 +76,7 @@ export default function Home() {
             <ButtonSvg
               id={'cont'}
               hoverId={'about'}
-              text={'about'}
+              text={'About'}
               onClick={() => Link('/about')}
               attrText={{ opacity: 0 }}
               attrPath={{ strokeDashoffset: 390 }}
@@ -83,6 +84,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </div>
+    </Layout>
   )
 }

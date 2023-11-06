@@ -1,4 +1,5 @@
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
+import Layout from "@/components/Layout";
 import Slice from "@/components/Slice"
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 import { useInterval, randomNumber } from "@/utils"
@@ -56,7 +57,7 @@ export default function CountDown() {
     }, 4800)
 
     return (
-        <div className="container">
+        <Layout title={'countdowm'}>
             <div className="container" style={{ position: 'fixed', top: '50%' }}>
                 {/* countdown 3 */}
                 <Slice delayIn={0} delayOut={1} style={{ top: -100 }}>
@@ -95,6 +96,6 @@ export default function CountDown() {
                     </svg>
                 </Slice>
             </div>
-        </div>
+        </Layout>
     )
 }

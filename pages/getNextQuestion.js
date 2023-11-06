@@ -3,6 +3,7 @@ import { useTranstionReducer } from "@/context/TransitionDispatcher"
 import { useRouter } from "next/router";
 import { useLayoutEffect, useState } from "react";
 import { saveAnswerToLocalStorage } from "@/utils";
+import Layout from "@/components/Layout";
 
 function GetNextQuestion() {
     const [data, dispatch] = useTranstionReducer();
@@ -46,7 +47,7 @@ function GetNextQuestion() {
     }, [isMounted])
 
     return (
-        <></>
+        <Layout title={'Get Next Quizz'} container={false} />
     )
 }
 

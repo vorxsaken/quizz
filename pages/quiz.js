@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useIsomorphicEffect } from "@/animation/useIsomophicEffect";
 import { useTranstionReducer } from "@/context/TransitionDispatcher";
 import FlyDownOut from "@/animation/FlyDownOut";
+import Layout from "@/components/Layout";
 
 export default function Quiz() {
     const [el, setEl] = useState();
@@ -16,7 +17,7 @@ export default function Quiz() {
     }, [])
 
     return (
-        <div className="container">
+        <Layout title={'Quiz'}>
             <FlyDownOut getOut={data?.getOut}>
                 <FlyUpInOut
                     delayIn={0.5}
@@ -49,6 +50,6 @@ export default function Quiz() {
             <div className="container container--row container__block">
                 <MultipleChoice el={el} />
             </div>
-        </div>
+        </Layout>
     )
 }

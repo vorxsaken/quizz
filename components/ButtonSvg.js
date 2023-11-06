@@ -2,7 +2,7 @@ import { gsap } from "gsap"
 
 function ButtonSvg({ text, id, onClick, attrText, attrPath, hoverId }) {
     const zoomOut = () => {
-        gsap.to(`.${hoverId} #childBorder`, { attr: {d: 'M 70 10 L 130 10 A 1 1 0 0 1 130 65 L 70 65 A 1 1 0 0 1 70 10 Z'}, duration: 0.4})
+        gsap.to(`.${hoverId} #childBorder`, { attr: { d: 'M 70 10 L 130 10 A 1 1 0 0 1 130 65 L 70 65 A 1 1 0 0 1 70 10 Z' }, duration: 0.4 })
     }
 
     return (
@@ -14,7 +14,7 @@ function ButtonSvg({ text, id, onClick, attrText, attrPath, hoverId }) {
                 dominantBaseline='middle'
                 textAnchor='middle'
                 fill='white'
-                className='text-medium'
+                className='text-medium font-bungee'
                 {...attrText}
             >
                 {text}
