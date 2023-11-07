@@ -31,7 +31,7 @@ function CheckAnswCard({ id, height, width, bgColor, alpha, answer, icon }) {
                             >
                                 {alpha}
                             </div>
-                            <span className={answer?.length > 21 ? 'text-extra-small' : ''}>{answer}</span>
+                            <span className={answer?.length > 18 ? 'text-extra-small' : ''}>{answer}</span>
                         </>
                     )}
                 </div>
